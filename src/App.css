@@ -3,7 +3,7 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 15vmin;
   pointer-events: none;
 }
 
@@ -15,7 +15,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  max-height: 50vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,9 +24,6 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
 
 @keyframes App-logo-spin {
   from {
@@ -35,4 +32,86 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.events {
+  width: 100%;
+  padding-top: 20px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.cart {
+  height: 3.5rem;
+  border: none;
+  background: none;
+  border-radius: 10%;
+  background-color: cornflowerblue;
+  font-size: large;
+  position: absolute;
+  top: 0.5Srem;
+  right: 1rem;
+  z-index: 10;
+  padding: 10px 0 10px 10px;
+  color: white;
+}
+
+.cart:hover {
+  background-color: rgb(158, 104, 208);
+}
+
+.cart-items {
+  position: relative;
+  bottom: 1px;
+  left: -23px;
+  font-size: small;
+}
+
+.events-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.description {
+  position: relative;
+}
+
+.speaker{
+  position: relative;
+  left: 4rem;
+  top: 5rem;  
+  padding: 10px;
+  background-color: rgb(60, 60, 143);
+  color: "white"; 
+  font-size: large; 
+}
+
+.organizer {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  /* width: 80%; */
+  max-width: auto;
+  display: flex;
+  /* flex-direction: row; */
+  background: #f8f9fa;
+  color: rgb(66, 33, 33);
+  text-align: center;
+  padding: 2em;
+  border-radius: 0%;
+  position: relative;
+}
+
+.profile-image {
+  border-radius: 2%;
+  border: 2px solid white;
+  width: 50%;
+}
+
+.location {
+  margin-top: 20px;
+}
+
+.location span {
+  font-weight: bold;
+  color: #007bff;
 }
