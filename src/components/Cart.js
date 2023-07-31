@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Container, Modal, Row } from 'react-bootstrap'
 
-const Cart = ({cart, handleCloseCart, showCart}) => {
+const Cart = ({cart, handleCloseCart, showCart, darkMode}) => {
   const [total, setTotal] = useState(0)
   const [cartItems, setCartItems] = useState([])
 
@@ -18,7 +18,6 @@ const Cart = ({cart, handleCloseCart, showCart}) => {
 
 
       setCartItems(newArray)
-      console.log(total)
     },[cart.cart])
 
     useEffect(() => {
@@ -43,7 +42,7 @@ const Cart = ({cart, handleCloseCart, showCart}) => {
     }
 
   return (
-    <Modal show={showCart} onHide={handleCloseCart} size='lg'>
+    <Modal show={showCart} className={`promo-cart ${darkMode ? 'dark-mode' : ''}`} onHide={handleCloseCart} size='lg'>
       <Modal.Header closeButton>
         <Modal.Title>Events Cart</Modal.Title>
       </Modal.Header>

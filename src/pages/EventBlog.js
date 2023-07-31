@@ -14,13 +14,12 @@ import Organizer from './Organizer';
 
 
 
-const EventBlog = ({events, event, show, handleClose, cart, setNewEvent}) => {
+const EventBlog = ({events, event, show, handleClose, cart, setNewEvent, darkMode}) => {
   const [organizer, setOrganizer] = useState("")
   const [promotedEvents, setPromotedEvents] = useState(null)
   const [relatedEvents, setRelatedEvents] = useState(null)
   const [read, setRead] = useState(false)
   const [synth, setSynth] = useState(null)
-  const [showOrganizer, setShowOrganizer] = useState(false)
 
   const navigate = useNavigate()
   const blogRef = useRef(null)
@@ -42,8 +41,7 @@ const EventBlog = ({events, event, show, handleClose, cart, setNewEvent}) => {
   }
 
   const openOrganizer = () => {
-    setShowOrganizer(!showOrganizer)
-    navigate("/event_blog/1234")
+    navigate(`/organizer/?id=${event.organizer_details[0].uid}`, { state: organizer, sendOrg: true })
   }
 
   useEffect(()=>{
@@ -104,10 +102,6 @@ const EventBlog = ({events, event, show, handleClose, cart, setNewEvent}) => {
         title
       }
     }`
-
-      
-      
-
     const url = `https://${base_url}/stacks/${config.values[2].value}?environment=${environment}&query=${query}`
 
     const options = {
@@ -121,7 +115,6 @@ const EventBlog = ({events, event, show, handleClose, cart, setNewEvent}) => {
       const response = await fetch(url, options)
       const results = await response.text()
 
-      console.log(JSON.parse(results))
       setOrganizer(JSON.parse(results).data.event_organizer) 
     } catch(error) {
       console.log(error)
@@ -130,17 +123,9 @@ const EventBlog = ({events, event, show, handleClose, cart, setNewEvent}) => {
 
   return (
     <div ref={blogRef} id="modal-title" aria-modal="true" aria-labelledby="modal-title" aria-required="true">
-    
-
-      {/* <Routes>
-        <Route path="/event_organizer" element={<Organizer organizer={organizer} />}>
-        </Route>
-      </Routes> */}
-
-    
       
 
-    <Modal show={show}  onHide={handleClose} size='xl' >
+    <Modal className={`event-blog ${darkMode ? 'dark-mode' : ''}`} show={show}  onHide={handleClose} size='xl' >
       <Modal.Header closeButton>
         <Modal.Title>{event.title}</Modal.Title>
       </Modal.Header>
@@ -152,7 +137,7 @@ const EventBlog = ({events, event, show, handleClose, cart, setNewEvent}) => {
       <div className='description'>
         {/* SCREEN READER BUTTON */}
         <Button className="speaker" onClick={screenReader}>
-          {!read ? <PiSpeakerHighFill />:<PiSpeakerXDuotone />}
+          {!read ? <PiSpeakerHighFill size={25}/>:<PiSpeakerXDuotone size={25}/>}
         </Button>
 
         <Modal.Body style={{fontSize: 18, width: "80%", margin: "auto", borderBottom: "1px solid lightgray"}} dangerouslySetInnerHTML={{__html : event.event_details.description}}></Modal.Body>
@@ -160,9 +145,9 @@ const EventBlog = ({events, event, show, handleClose, cart, setNewEvent}) => {
       <Modal.Body style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent:"space-around", borderBottom: '1px solid lightgray'}}> 
         
         {/* EVENT ORGANIZER */}
-        <div style={{border:"1px solid lightgray", borderRadius:"10%", maxWidth:"30%", display: "flex", flexDirection:"column", alignItems: "center", padding:"0.2rem"}}>
-          <h5>Organized By: <div onClick={openOrganizer}>{event.organizer}</div> </h5>
-          <Image src={organizer?.organizer_imageConnection?.edges[0].node.url} style={{width:"8rem"}} rounded width="30%" />
+        <div style={{borderRadius:"10%", maxWidth:"35%", display: "flex", alignItems: "center", padding:"0.2rem", justifyContent: "space-between"}}>
+          <h5>Organized By: <div className='organizer-link' onClick={openOrganizer}>{event.organizer}</div> </h5>
+          {/* <Image src={organizer?.organizer_imageConnection?.edges[0].node.url} style={{width:"8rem"}} rounded width="30%" /> */}
         </div>
         
         

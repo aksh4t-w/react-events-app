@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  height: 100%;
 }
 
 .App-logo {
@@ -41,6 +42,13 @@
   position: relative;
 }
 
+.grow { transition: all .2s ease-in-out; }
+.grow:hover { transform: scale(1.1); }
+
+.event-card {transition: all .2s ease-in-out;}
+
+.event-card:hover { transform: scale(1.08); }
+
 .cart {
   height: 3.5rem;
   border: none;
@@ -79,32 +87,59 @@
 
 .speaker{
   position: relative;
+  height: 50px;
+  width: 50px;
   left: 4rem;
-  top: 5rem;  
+  top: 4.5rem;  
   padding: 10px;
   background-color: rgb(60, 60, 143);
   color: "white"; 
-  font-size: large; 
+  font-weight: 800; 
+}
+
+.organizer-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .organizer {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  /* width: 80%; */
-  max-width: auto;
+  width: 80%;
+  max-height: 30%;
+  margin: auto;
+  margin-top: 2rem;
   display: flex;
   /* flex-direction: row; */
   background: #f8f9fa;
+  align-items: center;
   color: rgb(66, 33, 33);
   text-align: center;
   padding: 2em;
-  border-radius: 0%;
+  border-radius: 1%;
   position: relative;
 }
 
+.organizer-link {
+  color: blue;
+}
+
+.organizer-link:hover {
+  cursor: pointer;
+}
+
 .profile-image {
-  border-radius: 2%;
-  border: 2px solid white;
-  width: 50%;
+  /* border-radius: 2%; */
+  width: 40%;
+  max-height: 50%;
+  object-fit: contain;
+  /* border-right: 1px solid gray; */
+}
+
+.profile-main {
+  width: 70%;
+  margin-left: 1rem;
 }
 
 .location {
@@ -114,4 +149,86 @@
 .location span {
   font-weight: bold;
   color: #007bff;
+}
+
+
+
+
+
+
+/* Dark mode */
+.App.dark-mode {
+  background-color: #000000;
+  color: #ffffff;
+
+}
+
+.event-card {
+  background-color: #fffdd0;
+}
+
+.event-card.dark-mode {
+  background-color: #181717; 
+  color: #ffffff;
+  /* border-color: #181717; */
+  border: 1.75px solid #181717;
+}
+
+.organizer.dark-mode {
+  background-color: #282626; 
+  color: #ffffff;
+  /* border-color: #181717; */
+  border: 1.75px solid #181717;
+}
+
+
+.dark-mode.promo-cart .modal-content {
+  background-color: #181717;
+  color: white;
+}
+
+
+.dark-mode.event-blog .modal-content {
+  background-color: #181717;
+  color: white;
+}
+
+.dark-mode .promoted-card {
+  background-color: #000000;
+  color: white;
+  /* border: 1px solid #000000 */
+}
+
+.moon-icon {
+  margin-right: 8px;
+}
+
+.dark-mode-toggle {
+  height: 3.5rem;
+  width: 3.5rem;
+  border: none;
+  background: none;
+  border-radius: 10%;
+  background-color: purple;
+  font-size: large;
+  position: absolute;
+  top: 4.80rem;
+  right: 6rem;
+  z-index: 10;
+  padding: 10px 0 10px 10px;
+  color: white;
+}
+
+.App-footer {
+  display: flex;
+  /* position: fixed; */
+  align-items: center;
+  justify-content: center;
+  background-color: #282c34;
+  color: white;
+  padding: 1px;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+  height: 10vh;
 }

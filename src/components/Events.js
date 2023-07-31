@@ -5,17 +5,12 @@ import {BsCart} from 'react-icons/bs'
 import Cart from './Cart'
 import EventsNavbar from './EventsNavbar'
 import { Helmet } from "react-helmet-async";
-import {BrowserRouter as Router,Routes,
-  Route,
-  Link,
-  NavLink,
-  useNavigate,
-} from "react-router-dom";
+
 import { Nav } from 'react-bootstrap'
 
-const Events = () => {
+const Events = ({darkMode, events, setEvents}) => {
   const [data, setData] = useState(null)
-  const [events, setEvents] = useState(null)
+  // const [events, setEvents] = useState(null)
   const [organizer, setOrganizer] = useState('')
   const [cart, setCart] = useState([])
 
@@ -42,7 +37,6 @@ const Events = () => {
         access_token: config.values[3].value,
       }
     }
-
     try {
       const response2 = await fetch(url2, options)
       const results2 = await response2.text()
@@ -56,21 +50,21 @@ const Events = () => {
   }
 
   useEffect(() => {
-    getData()
+    // getData()
   },[])
 
   return (
     <>
-    <EventsNavbar events={events} setEvents={setEvents}/>
-    <div className='events'>
+    
+    <div className={`events ${darkMode ? 'dark-mode' : ''}`}>
       <button className='cart' onClick={handleShowCart}><BsCart size={'40px'} /><span className="cart-items">{cart.length}</span></button>
-      <Cart handleCloseCart={handleCloseCart} showCart={showCart} cart={{cart, setCart}}/>
+      <Cart handleCloseCart={handleCloseCart} showCart={showCart} cart={{cart, setCart}} darkMode={darkMode} />
 
       {/* Displaying multiple event cards with image and title. */}
       <div className='events-container'>
         {events?.entries?.map((event, index) => (
-          <>
-            <Helmet>
+          <div key={index}>
+            <Helmet >
             {
               <>
                 <title>{event.seo.title}</title>
@@ -78,8 +72,8 @@ const Events = () => {
               </>
             }
             </Helmet>
-            <EventCard key={index} events={events} event={event} setOrganizer={setOrganizer} cart={{cart, setCart}}/>
-          </>
+            <EventCard key={index} events={events} event={event} setOrganizer={setOrganizer} cart={{cart, setCart}} darkMode={darkMode}/>
+          </div>
           ))}
       </div>
     </div>

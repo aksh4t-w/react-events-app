@@ -3,7 +3,7 @@ import { Button, Card } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import config from "../contentstack_config.json"
 
-const PromotedCard = ({handleClose, relatedEvents, setNewEvent}) => {
+const PromotedCard = ({handleClose, relatedEvents, setNewEvent, darkMode}) => {
   // const navigate = useNavigate()
   // navigate('/eventblog/')
 
@@ -44,7 +44,7 @@ const PromotedCard = ({handleClose, relatedEvents, setNewEvent}) => {
     <>
     {
       relatedEvents?.slice(0,1)?.map((item,index) => (
-        <Card key={index} style={{ width: '18rem', margin: '3rem' }} >
+        <Card key={index} className={`promoted-card event-card ${darkMode ? 'dark-mode' : ''}`} style={{ width: '18rem', margin: '3rem' }} >
           <Card.Img variant="top" src={item?.poster?.url} height={"180rem"} />
           <Card.Body>
             <Card.Title>{item?.title}</Card.Title>
